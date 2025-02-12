@@ -49,7 +49,7 @@ class _RewardRingsState extends State<RewardRings>
               'Reward Rings',
               style: TextStyle(
                 fontSize: 20,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w500,
               ),
             ),
             const SizedBox(width: 10),
@@ -121,11 +121,12 @@ class _RewardRingsState extends State<RewardRings>
 
   Widget _buildLegendItem(String title, Color color, String count) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start, // Align text to the top
       children: [
         // Color Circle
         Container(
-          width: 16,
-          height: 16,
+          width: 24,
+          height: 24,
           decoration: BoxDecoration(
             color: color,
             shape: BoxShape.circle,
@@ -133,37 +134,39 @@ class _RewardRingsState extends State<RewardRings>
         ),
         const SizedBox(width: 12),
 
-        // Title
-        Expanded(
-          child: Text(
-            title,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
+        // Title, Info Icon, and Medal Count in Column
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(width: 4),
+
+                // Info Icon placed inline with title
+                Image.asset(
+                  'assets/isymbol.png',
+                  width: 20,
+                  height: 20,
+                ),
+              ],
             ),
-          ),
-        ),
-
-        // Count
-        Text(
-          count,
-          style: const TextStyle(
-            color: Colors.grey,
-            fontSize: 14,
-          ),
-        ),
-
-        const SizedBox(width: 8),
-
-        // Info Icon
-        IconButton(
-          icon: const Icon(Icons.info),
-          onPressed: () {
-            // Add your onPressed logic here
-            print('Info icon pressed for $title');
-          },
-          padding: EdgeInsets.zero, // Remove default padding
-          constraints: const BoxConstraints(), // Remove default constraints
+            const SizedBox(height: 2), // Small spacing for better alignment
+            Text(
+              'Achieved $count',
+              style: const TextStyle(
+                color: Color.fromARGB(255, 76, 75, 75),
+                fontSize: 14,
+              ),
+            ),
+          ],
         ),
       ],
     );
